@@ -41,7 +41,7 @@ const AddSong = () => {
   const [songName, setsongName] = useState("");
   const [dob, setDob] = useState("");
   const [coverletter, setCoverLetter] = useState("");
-  const [artistId, setArtistId] = useState("");
+  const [artistId, setArtistId] = useState([]); //  <--- array bana diya
 
   const [songNameerror, setsongNameerror] = useState(false);
   const [doberror, setDoberror] = useState(false);
@@ -243,13 +243,19 @@ const AddSong = () => {
             <div className="md:w-2/4">
               {artistdata.length > 0 && (
                 <Autocomplete
+                  //new
+                  multiple
+                  //
                   disablePortal
                   id="combo-box-demo"
                   options={artistdata}
                   getOptionLabel={(option) => option.ArtistName}
                   sx={{ width: 300 }}
                   onChange={(event, newValue) => {
-                    setArtistId(newValue?.ID);
+                    console.log(newValue);
+                    //old  -->  setArtistId(newValue?.ID);
+                    //new
+                    setArtistId(newValue);
                     setArtistIderror(false);
                   }}
                   renderInput={(params) => <TextField {...params} />}

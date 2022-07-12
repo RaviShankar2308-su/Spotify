@@ -2,9 +2,6 @@
 
 It is an simple react based application in which we can register user, then user can create artist and assign them a song, user will rate according to there choice
 
-### Live URL
-
-https://stellar-longma-b8e6f6.netlify.app/
 
 ### Backend DataBase structure
 
@@ -56,16 +53,17 @@ Major frameworks/libraries used in the project.
 
 ### Home screen
 
-![Alt text](./Frontend/Image/delta1.jpg)
+![Alt text](C:\Users\lenovo\Desktop\assignmentSpotify-master\Frontend\Image\delta1.jpg)
 
 ### Create Song
 
-![Alt text](./Frontend/Image/delta2.jpg)
+![Alt text](Frontend\Image\delta2.jpg)
 
 ### User Login nd Register
 
-![Alt text](./Frontend/Image/delta6.jpg)
+![Alt text](C:\Users\lenovo\Desktop\assignmentSpotify-master\Frontend\Image\delta3.png)
 
 ### All Artist List
 
-![Alt text](./Frontend/Image/delta3.jpg)
+![Alt text](.\Frontend\Image\delta4.png)
+![Alt text](C:\Users\lenovo\Desktop\assignmentSpotify-master\Frontend\Image\delta5.png)

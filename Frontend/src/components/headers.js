@@ -56,15 +56,17 @@ const Header = () => {
             </>
           ) : null}
         </div>
-        <div
-          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer"
-          onClick={() => {
-            localStorage.removeItem("deltaxusertoken");
-            navigate("/");
-          }}
-        >
-          LOGOUT
-        </div>
+        {lets === true ? (
+          <div
+            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 cursor-pointer"
+            onClick={() => {
+              localStorage.removeItem("deltaxusertoken");
+              navigate("/");
+            }}
+          >
+            LOGOUT
+          </div>
+        ) : null}
       </div>
     </nav>
   );

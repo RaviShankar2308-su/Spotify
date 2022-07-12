@@ -32,7 +32,8 @@ const fetchSongHandler = async (event, context, callback) => {
               `select Song.ID, Song.songName, Song.releaseDate, Song.coverUrl, Song.totalRating, Song.totalRatingUser, Artist.ArtistName 
               from ArtistSong
               LEFT JOIN Song on ArtistSong.songId = Song.ID
-              LEFT JOIN Artist on ArtistSong.artistId = Artist.ID`,
+              LEFT JOIN Artist on ArtistSong.artistId = Artist.ID
+              group by Song.songName`,
               function (err, result, fields) {
                 if (err) {
                   reject(err);

@@ -2,6 +2,26 @@ const jwt = require("jsonwebtoken");
 const connection = require("../../database");
 const { createResponse } = require("../../response/response");
 
+function createAnchor(ArtistId, songId) {
+  new Promise((resolve, reject) => {
+    //insert anchor into database with roleId = 1
+    connection.getConnection((error, connections) => {
+      if (error) throw error;
+      connections.query(
+        `INSERT INTO ArtistSong (artistId, songId) VALUES (${ArtistId}, ${songId})`,
+        function (err, result, fields) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+          connections.destroy();
+        }
+      );
+    });
+  });
+}
+
 const createSongHandler = async (event, context, callback) => {
   try {
     var token = event.headers.Authorization?.split(" ")[1];
@@ -52,7 +72,7 @@ const createSongHandler = async (event, context, callback) => {
 
         const verifySongFromSongNameAPI = await verifySongFromSongName;
 
-        if (verifySongFromSongNameAPI) {
+        if (verifySongFromSongNameAPI.length > 0) {
           return callback(
             null,
             createResponse(400, {
@@ -86,27 +106,12 @@ const createSongHandler = async (event, context, callback) => {
         const createAnchorResult = await createSong;
 
         //promise to create anchor
-        const createArtistSong = new Promise((resolve, reject) => {
-          //insert anchor into database with roleId = 1
-          connection.getConnection((error, connections) => {
-            if (error) throw error;
-            connections.query(
-              `INSERT INTO ArtistSong (artistId, songId) VALUES (${ArtistId}, ${songId})`,
-              function (err, result, fields) {
-                if (err) {
-                  reject(err);
-                } else {
-                  resolve(result);
-                }
-                connections.destroy();
-              }
-            );
-          });
+
+        ArtistId.map(async (item) => {
+          await createAnchor(item.ID, songId);
         });
 
-        const createAnchorSongResult = await createArtistSong;
-
-        if (createAnchorResult && createAnchorSongResult) {
+        if (createAnchorResult) {
           return callback(
             null,
             createResponse(200, {
